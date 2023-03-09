@@ -21,12 +21,12 @@ export class UsersService {
     },
     {
       userId: 3,
-      username: "admin",
-      password: "123456"
-    }
+      username: 'admin',
+      password: '123456',
+    },
   ];
 
   async findOne(username: string): Promise<User | undefined> {
-    return this.users.find(user => user.username === username);
+    return this.users.find((user) => user.username === username);
   }
 }

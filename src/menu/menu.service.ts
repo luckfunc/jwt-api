@@ -12,8 +12,6 @@ export class MenuService {
   }
 
   findAll() {
-
-
     return this.menu.find({
       where: {
         name: Like(`%%`)
