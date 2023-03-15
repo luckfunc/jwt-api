@@ -18,6 +18,7 @@ specifiers:
   '@types/supertest': ^2.0.11
   '@typescript-eslint/eslint-plugin': ^5.0.0
   '@typescript-eslint/parser': ^5.0.0
+  dayjs: ^1.11.7
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
@@ -46,6 +47,7 @@ dependencies:
   '@nestjs/passport': registry.npmmirror.com/@nestjs/passport/9.0.3_v3ijvyhfbmibt6kvwmic262qla
   '@nestjs/platform-express': registry.npmmirror.com/@nestjs/platform-express/9.3.9_77foi4w27ghy47yutmnzv7krjy
   '@nestjs/typeorm': registry.npmmirror.com/@nestjs/typeorm/9.0.1_rfqdnwiybzocqbxtj3lzfvraga
+  dayjs: registry.npmmirror.com/dayjs/1.11.7
   mysql2: registry.npmmirror.com/mysql2/3.2.0
   passport: registry.npmmirror.com/passport/0.6.0
   passport-jwt: registry.npmmirror.com/passport-jwt/4.0.1
@@ -2753,6 +2755,12 @@ packages:
     name: date-fns
     version: 2.29.3
     engines: {node: '>=0.11'}
+    dev: false
+
+  registry.npmmirror.com/dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dayjs/-/dayjs-1.11.7.tgz}
+    name: dayjs
+    version: 1.11.7
     dev: false
 
   registry.npmmirror.com/debug/2.6.9:
