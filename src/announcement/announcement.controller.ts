@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AnnouncementService } from './announcement.service';
 import { CreateAnnouncementDto } from './dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/update-announcement.dto';
@@ -13,8 +13,8 @@ export class AnnouncementController {
   }
 
   @Get()
-  findAll() {
-    return this.announcementService.findAll();
+  findAll(@Query() query: { content: string }) {
+    return this.announcementService.findAll(query);
   }
 
   @Get(':id')
@@ -23,7 +23,7 @@ export class AnnouncementController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAnnouncementDto: UpdateAnnouncementDto) {
+  update(@Param('id') id: number, @Body() updateAnnouncementDto: UpdateAnnouncementDto) {
     return this.announcementService.update(+id, updateAnnouncementDto);
   }
 

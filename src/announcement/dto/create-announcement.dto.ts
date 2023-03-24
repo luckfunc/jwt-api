@@ -1,4 +1,4 @@
 export class CreateAnnouncementDto {
-  id: string
+  id: number
   content: string
 }
