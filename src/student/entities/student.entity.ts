@@ -10,7 +10,6 @@ export class Student {
     @Column()
     student_phone: string
     @Column()
-
     student_class: string
     @Column()
     create_time: string;
