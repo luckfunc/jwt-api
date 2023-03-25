@@ -8,7 +8,12 @@ import { Menu } from './entities/menu.entity';
 export class MenuService {
   constructor(@InjectRepository(Menu) private readonly menu: Repository<Menu>) { }
   create(createMenuDto: CreateMenuDto) {
-    return 'This action adds a new menu';
+    const data = new Menu();
+    data.name = createMenuDto.name;
+    data.icon = createMenuDto.icon;
+    data.route = createMenuDto.route;
+    data.sort = createMenuDto.sort;
+    return this.menu.save(data);
   }
 
   findAll() {

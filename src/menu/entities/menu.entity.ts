@@ -9,6 +9,6 @@ export class Menu {
   icon: string
   @Column()
   route: string
-  @Column()
+  @Column({ nullable: true })
   sort: number
 }
