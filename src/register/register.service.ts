@@ -16,11 +16,12 @@ export class RegisterService {
   if (existingUser) {
     throw new Error('该用户名已经被注册');
   }
-
+  const { username, password, className, grade } = createRegisterDto;
   const user = new Register();
-  user.username = createRegisterDto.username;
-  user.password = createRegisterDto.password;
-
+  user.username = username;
+  user.password = password;
+  user.className = className;
+  user.grade = grade;
   return this.register.save(user);
 }
 
