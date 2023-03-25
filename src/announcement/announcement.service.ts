@@ -7,9 +7,10 @@ import { Like, Repository } from 'typeorm';
 @Injectable()
 export class AnnouncementService {
   constructor(@InjectRepository(Announcement)private readonly announcement:  Repository<Announcement>) {}
-  create(createAnnouncementDto: CreateAnnouncementDto) {
+  create(createAnnouncementDto: CreateAnnouncementDto, username: any) {
     const data = new Announcement();
     data.content = createAnnouncementDto.content;
+    data.user = username;
     return this.announcement.save(data);
   }
 
