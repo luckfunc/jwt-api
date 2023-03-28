@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ReplyService } from './reply.service';
 import { CreateReplyDto } from './dto/create-reply.dto';
 import { UpdateReplyDto } from './dto/update-reply.dto';
@@ -13,9 +13,10 @@ export class ReplyController {
   }
 
   @Get()
-  findAll() {
-    return this.replyService.findAll();
+  findAll(@Query() query: { parentCommentId: number }) {
+    return this.replyService.findAll(query);
   }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {

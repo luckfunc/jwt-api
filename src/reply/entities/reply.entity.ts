@@ -38,7 +38,7 @@ export class Reply {
   parentComment?: Comment;
 
   @Column({ nullable: true })
-  parentCommentId?: number;
+  parentCommentId?: any;
   @Column()
   icon: string
 }

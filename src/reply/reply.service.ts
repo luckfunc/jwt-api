@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {  Repository } from 'typeorm';
+import {  Like, Repository } from 'typeorm';
 import { CreateReplyDto } from './dto/create-reply.dto';
 import { UpdateReplyDto } from './dto/update-reply.dto';
 import { Reply } from './entities/reply.entity';
@@ -47,10 +47,12 @@ export class ReplyService {
     return savedReply;
   }
 
-
-
-  findAll() {
-    return `This action returns all reply`;
+  async findAll(query: { parentCommentId?: number }) {
+    const where = {};
+    if (query.parentCommentId) {
+      where['parentCommentId'] = query.parentCommentId;
+    }
+    return this.replyRepository.find({ where });
   }
 
   findOne(id: number) {
@@ -62,6 +64,7 @@ export class ReplyService {
   }
 
   remove(id: number) {
-    return "haha"
+    console.log(id, "id");
+    return this.replyRepository.delete(id);
   }
 }
