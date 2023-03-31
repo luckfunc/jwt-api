@@ -7,7 +7,7 @@ export class Reply {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ length: 10000 })
   content: string;
 
   @Column()
