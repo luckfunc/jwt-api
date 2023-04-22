@@ -11,6 +11,9 @@ import { CommentModule } from './comment/comment.module';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { RegisterModule } from './register/register.module';
 import { ReplyModule } from './reply/reply.module';
+import { RoomModule } from './room/room.module';
+import { SeatModule } from './seat/seat.module';
+import { ReservationModule } from './reservation/reservation.module';
 @Module({
   imports: [AuthModule, UsersModule , TypeOrmModule.forRoot({
     type: "mysql", //数据库类型
@@ -24,7 +27,7 @@ import { ReplyModule } from './reply/reply.module';
     retryDelay:500, //重试连接数据库间隔
     retryAttempts:10,//重试连接数据库的次数
     autoLoadEntities:true, //如果为true,将自动加载实体 forFeature()方法注册的每个实体都将自动添加到配置对象的实体数组中
-  }), MenuModule, StudentModule, CommentModule, AnnouncementModule, RegisterModule, ReplyModule],
+  }), MenuModule, StudentModule, CommentModule, AnnouncementModule, RegisterModule, ReplyModule, RoomModule, SeatModule, ReservationModule],
   controllers: [AppController],
   providers: [AppService]
 })
