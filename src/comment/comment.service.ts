@@ -5,7 +5,6 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 import { Comment } from './entities/comment.entity';
 import { Like, Repository } from 'typeorm';
 import { Register } from 'src/register/entities/register.entity';
-import { error } from 'console';
 @Injectable()
 export class CommentService {
   constructor(
