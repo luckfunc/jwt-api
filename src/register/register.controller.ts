@@ -17,9 +17,9 @@ export class RegisterController {
     return this.registerService.findAll(query);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.registerService.findOne(+id);
+  @Get(':username')
+  findOne(@Param('username') username: string) {
+    return this.registerService.findOne(username);
   }
 
   @Patch(':id')

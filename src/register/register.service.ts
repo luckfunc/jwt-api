@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Get, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Like, Repository } from 'typeorm';
 import { CreateRegisterDto } from './dto/create-register.dto';
@@ -7,43 +7,49 @@ import { Register } from './entities/register.entity';
 
 @Injectable()
 export class RegisterService {
-  constructor(@InjectRepository(Register) private readonly register: Repository<Register>) {}
- async create(createRegisterDto: CreateRegisterDto) {
-  const existingUser = await this.register.findOne({
-    where: { username: createRegisterDto.username }
-  });
+    constructor(@InjectRepository(Register) private readonly registerRepository: Repository<Register>) {
+    }
 
-  if (existingUser) {
-    throw new Error('该用户名已经被注册');
-  }
-  const { username, password, className, grade } = createRegisterDto;
-  const user = new Register();
-  user.username = username;
-  user.password = password;
-  user.className = className;
-  user.grade = grade;
-  return this.register.save(user);
-}
+    async create(createRegisterDto: CreateRegisterDto) {
+        const existingUser = await this.registerRepository.findOne({
+            where: { username: createRegisterDto.username }
+        });
 
-  async findAll(query: { username: string }): Promise<any> {
-    const registers = await this.register.find({
-      where: {
-        username: Like(`%${query.username}%`)
-      }
-    });
-    return registers.map(({userId, username, password}) => ({userId, username, password}));
-  }
-  
+        if (existingUser) {
+            throw new Error('该用户名已经被注册');
+        }
+        const { username, password, className, grade } = createRegisterDto;
+        const user = new Register();
+        user.username = username;
+        user.password = password;
+        user.className = className;
+        user.grade = grade;
+        return this.registerRepository.save(user);
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} register`;
-  }
+    async findAll(query: { username: string }): Promise<any> {
+        const registers = await this.registerRepository.find({
+            where: {
+                username: Like(`%${query.username}%`)
+            }
+        });
+        return registers.map(({ userId, username, password }) => ({ userId, username, password }));
+    }
 
-  update(id: number, updateRegisterDto: UpdateRegisterDto) {
-    return `This action updates a #${id} register`;
-  }
+    async findOne(username: string): Promise<any> {
+        const register = await this.registerRepository.findOne({
+            where: {
+                username
+            }
+        })
+        return register;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} register`;
-  }
+    update(id: number, updateRegisterDto: UpdateRegisterDto) {
+        return `This action updates a #${id} register`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} register`;
+    }
 }
