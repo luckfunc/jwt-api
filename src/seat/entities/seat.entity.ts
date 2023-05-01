@@ -13,6 +13,12 @@ export class Seat {
   @Column({ default: 0 })
   status: number;
 
+  @Column()
+  userId: number
+
+  @Column()
+  username: string
+
   @ManyToOne(() => Room, (room) => room.seats)
   room: Room;
 
