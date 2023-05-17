@@ -64,7 +64,7 @@ export class ReplyService {
   }
 
   remove(id: number) {
-    console.log(id, "id");
+    // console.log(id, "id");
     return this.replyRepository.delete(id);
   }
 }

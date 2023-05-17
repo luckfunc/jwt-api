@@ -29,14 +29,13 @@ export class ReservationService {
         const seatInfo = await this.seatService.findOne(seat_id);
         reservation.seat = seatInfo;
         await this.reservationRepository.save(reservation);
-        console.log(reservation.seat, 'seat信息');
         const params = {
             ...seatInfo,
             status: 1,
             username: username
         }
-        console.log(params, 'params');
-        console.log(reservation.register, 'register');
+        // console.log(params, 'params');
+        // console.log(reservation.register, 'register');
         return this.seatService.update(seat_id, params);
     }
 
@@ -87,7 +86,7 @@ export class ReservationService {
     }
 
     async remove(id: number) {
-        console.log(id);
+        // console.log(id);
         const seatInfo = await this.reservationRepository.find({
             where: {
               id
