@@ -22,6 +22,12 @@ export class RegisterController {
     return this.registerService.findOne(username);
   }
 
+  @Post('student')
+  findStudent(@Query() query: { username: string }) {
+    // console.log('body', query);
+    return this.registerService.findStudent(query);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRegisterDto: UpdateRegisterDto) {
     return this.registerService.update(+id, updateRegisterDto);
