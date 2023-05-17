@@ -16,16 +16,24 @@ export class RoomService {
   }
 
   async findAll() {
-    const rooms = await this.roomRepository.find(
-      {
-        relations: ['seats']
-      }
-    );
+    // const rooms = await this.roomRepository.find(
+    //   {
+    //     relations: ['seats']
+    //   }
+    // );
+    // return rooms;
+    const rooms = await this.roomRepository.find();
     return rooms;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} room`;
+  findOne(description: string) {
+    console.log(description);
+    const room = this.roomRepository.find({
+      where: {
+        description
+      }
+    })
+    return room;
   }
 
   update(id: number, updateRoomDto: UpdateRoomDto) {

@@ -17,9 +17,9 @@ export class RoomController {
     return this.roomService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roomService.findOne(+id);
+  @Get(':description')
+  findOne(@Param('description') description: string) {
+    return this.roomService.findOne(description);
   }
 
   @Patch(':id')

@@ -12,7 +12,6 @@ export class Room {
 
   @Column()
   description: string;
-
   @OneToMany(() => Seat, (seat) => seat.room)
   seats: Seat[];
 }
