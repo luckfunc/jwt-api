@@ -17,6 +17,9 @@ export class Seat {
   userId: number
 
   @Column()
+  roomId: number
+
+  @Column()
   username: string
 
   @ManyToOne(() => Room, (room) => room.seats)

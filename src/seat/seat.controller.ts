@@ -15,10 +15,21 @@ export class SeatController {
   findAll() {
     return this.seatService.findAll();
   }
+  
+  @Get('/room/:roomId') 
+  //通过roomId查找座位
+  findAllByRoomId(@Param('roomId') roomId) {
+    return this.seatService.findAllByRoomId(roomId);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.seatService.findOne(+id);
+  }
+
+  @Get('/number/:num')
+  findOneSeat(@Param('num') num) {
+    return this.seatService.findOneSeat(+num);
   }
 
   @Patch(':id')

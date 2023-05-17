@@ -17,22 +17,44 @@ export class SeatService {
   }
 
   async findAll() {
-    const seats = await this.seatRepository.find({ relations: ['reservations'] });
-    return seats.map(seat => {
-      const reserved = seat.reservations.some(reservation => {
-        // return reservation.reservation_time > Date.now();
-      });
-      return {
-        ...seat,
-        reserved
-      };
-    });
+    const seat = await this.seatRepository.find();
+    // const seats = await this.seatRepository.find({ relations: ['reservations'] });
+    // return seats.map(seat => {
+    //   const reserved = seat.reservations.some(reservation => {
+    //     // return reservation.reservation_time > Date.now();
+    //   });
+    //   return {
+    //     ...seat,
+    //     reserved
+    //   };
+    // });
+    return seat;
   }
 
   async findOne(id: number) {
     const seat = await this.seatRepository.findOne({
       where: {
         id
+      }
+    })
+    return seat;
+  }
+
+  async findOneSeat(num: number) {
+    console.log(num, typeof num);
+    const seat = await this.seatRepository.find({
+      where: {
+        seatNumber: num
+      }
+    });
+    return seat;
+  }
+
+  async findAllByRoomId(roomId: number) {
+    console.log(roomId, 'idddd')
+    const seat = await this.seatRepository.find({
+      where: {
+        roomId: roomId
       }
     })
     return seat;
