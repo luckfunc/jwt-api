@@ -18,11 +18,11 @@ export class ReplyService {
     private registerRepository: Repository<Register>,
   ) {}
   async create(createReplyDto: CreateReplyDto) {
-    const { content, userId, parentCommentId } = createReplyDto;
+    const { content, parentCommentId, username } = createReplyDto;
     // 查找用户
-    const { className, grade, icon } = await this.registerRepository.findOne({
+    const { className, grade, icon, userId } = await this.registerRepository.findOne({
       where: {
-        userId: userId
+        username: username
       }
     });
     const parentComment = await this.commentRepository.findOne({
