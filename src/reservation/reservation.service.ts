@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { InjectRepository } from "@nestjs/typeorm";
@@ -7,15 +7,14 @@ import { Repository } from "typeorm";
 import { RegisterService } from "../register/register.service";
 import { SeatService } from "../seat/seat.service";
 import { Room } from "../room/entities/room.entity";
-import { Seat } from "../seat/entities/seat.entity";
 import * as dayjs from 'dayjs';
 @Injectable()
 export class ReservationService {
     constructor(
         @InjectRepository(Reservation) private reservationRepository: Repository<Reservation>,
-        @InjectRepository(Seat) private seatRepository: Repository<Seat>,
         @InjectRepository(Room) private roomRepository: Repository<Room>,
         private readonly registerService: RegisterService,
+        @Inject(forwardRef(() => SeatService))
         private readonly seatService: SeatService
     ) {
     }
