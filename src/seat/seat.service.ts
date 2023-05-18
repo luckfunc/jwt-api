@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { CreateSeatDto } from './dto/create-seat.dto';
 import { UpdateSeatDto } from './dto/update-seat.dto';
 import { Seat } from './entities/seat.entity';
@@ -6,6 +6,7 @@ import { Reservation } from 'src/reservation/entities/reservation.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ReservationService } from 'src/reservation/reservation.service';
+import { ModuleRef } from '@nestjs/core';
 @Injectable()
 export class SeatService {
   constructor(
@@ -13,6 +14,8 @@ export class SeatService {
     private seatRepository: Repository<Seat>,
     @InjectRepository(Reservation)
     private reservationRepository: Repository<Reservation>,
+    @Inject(forwardRef(() => ReservationService))
+    private readonly reservationService: ReservationService
   ) {}
   create(createSeatDto: CreateSeatDto) {
     const seat = new Seat();
@@ -61,7 +64,6 @@ export class SeatService {
   }
 
   async findAllByRoomId(roomId: number) {
-    console.log(roomId, 'idddd')
     const seat = await this.seatRepository.find({
       where: {
         roomId: roomId
@@ -81,8 +83,7 @@ export class SeatService {
         seatId: id
       }
     })
-    console.log(reservation, '123123')
-    // this.reservationService.remove(id);
-    return `This action removes a #${id} seat`;
+    const reservationId = reservation[0].id;
+    return  this.reservationService.remove(reservationId);
   }
 }
