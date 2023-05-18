@@ -12,7 +12,12 @@ export class RoomService {
     private readonly roomRepository: Repository<Room>,
   ) { }
   create(createRoomDto: CreateRoomDto) {
-    return 'This action adds a new room';
+    const room = new Room();
+    room.description = createRoomDto.description;
+    room.roomNumber = createRoomDto.roomNumber;
+    room.name = createRoomDto.name;
+    
+    return this.roomRepository.save(room);
   }
 
   async findAll() {
@@ -22,7 +27,11 @@ export class RoomService {
     //   }
     // );
     // return rooms;
-    const rooms = await this.roomRepository.find();
+    const rooms = await this.roomRepository.find({
+      order: {
+        id: 'DESC'
+      }
+    });
     return rooms;
   }
 
@@ -31,7 +40,8 @@ export class RoomService {
     const room = this.roomRepository.find({
       where: {
         description
-      }
+      },
+      
     })
     return room;
   }
