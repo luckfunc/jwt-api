@@ -11,6 +11,9 @@ export class Reservation {
   @Column({ default: null })
   end_time: number | null
 
+  @Column()
+  seatId: number
+
   @ManyToOne(() => Register, (register) => register.reservations)
   register: Register;
 
