@@ -14,12 +14,12 @@ export class CommentService {
     private registerRepository: Repository<Register>,
   ) {}
   async create(createCommentDto: CreateCommentDto) {
-    const { content, userId, parentCommentId } = createCommentDto;
+    const { content, username, parentCommentId } = createCommentDto;
 
     // 查找用户
-    const { className, grade, icon } = await this.registerRepository.findOne({
+    const { className, grade, icon, userId } = await this.registerRepository.findOne({
       where: {
-        userId: userId
+        username: username
       }
     });
 
